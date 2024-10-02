@@ -1,0 +1,1464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Srijan</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.4.5/swiper-bundle.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    overflow-x: hidden;
+    background-color: #f0f0f0;
+}
+
+/* Header and Navbar Styles with Glassmorphism */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    width: 40px;
+    height: 40px;
+    background-color: #FFA07A;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    color: #8B0000;
+    margin-right: 10px;
+    transition: all 0.3s ease;
+}
+
+.logo:hover {
+    transform: rotate(360deg);
+}
+
+.logo-text {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #FFA07A;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+nav ul {
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    margin-left: 2rem;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    position: relative;
+    overflow: hidden;
+}
+
+nav ul li a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0);
+    transform: translateX(-100%);
+    transition: all 0.3s ease;
+    z-index: -1;
+}
+
+nav ul li a:hover::before {
+    transform: translateX(0);
+}
+
+/* Button styles */
+.btn {
+    background-color: #FFA07A;
+    color: #8B0000;
+    padding: 0.5rem 1.5rem;
+    border-radius: 25px;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn:hover {
+    background-color: transparent;
+    border-color: #FFA07A;
+    color: #FFA07A;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn.pulse {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 160, 122, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(255, 160, 122, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 160, 122, 0);
+    }
+}
+
+/* Language selector styles */
+.language-selector {
+    position: relative;
+    margin-left: 2rem;
+}
+
+.language-selector select {
+    appearance: none;
+    background-color: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    color: black;
+    padding: 0.5rem 2rem 0.5rem 1rem;
+    border-radius: 25px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.language-selector select:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.language-selector select:focus {
+    outline: none;
+}
+
+.language-selector::after {
+    content: '\25BC';
+    position: absolute;
+    top: 50%;
+    right: 1rem;
+    transform: translateY(-50%);
+    color: white;
+    pointer-events: none;
+}
+
+/* Scroll effect */
+header.scrolled .header-content {
+    background: rgba(139, 0, 0, 0.9);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+
+/* Hero section styles */
+.hero {
+    background: linear-gradient(135deg, #FF6347, #FF8C00);
+    color: white;
+    padding: 12rem 2rem 8rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#particles-js {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.hero h1 {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.hero p {
+    font-size: 1.3rem;
+    margin-bottom: 2rem;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}
+
+/* Games section styles */
+.games {
+    padding: 6rem 2rem;
+    background-color: #fff;
+}
+
+.games h2 {
+    text-align: center;
+    margin-bottom: 3rem;
+    font-size: 2.5rem;
+    color: #8B0000;
+}
+
+.game-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.game-card {
+    text-align: center;
+    padding: 2rem;
+    background-color: #f8f8f8;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.game-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.game-icon {
+    width: 80px;
+    height: 80px;
+    background-color: #FFA07A;
+    border-radius: 50%;
+    margin: 0 auto 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.game-card:hover .game-icon {
+    transform: scale(1.1);
+}
+
+.game-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #8B0000;
+}
+
+/* Impact section styles */
+.impact {
+    background-color: #8B0000;
+    color: white;
+    padding: 6rem 2rem;
+    text-align: center;
+}
+
+.impact h2 {
+    margin-bottom: 3rem;
+    font-size: 2.5rem;
+}
+
+.impact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.impact-stat {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: #FFA07A;
+}
+
+/* Testimonial section styles */
+.testimonial {
+    background-color: #f8f8f8;
+    padding: 6rem 2rem;
+    text-align: center;
+    overflow: hidden;
+}
+
+.testimonial h2 {
+    margin-bottom: 3rem;
+    font-size: 2.5rem;
+    color: #8B0000;
+}
+
+.swiper-container {
+    width: 100%;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.swiper-slide {
+    background-position: center;
+    background-size: cover;
+    width: 300px;
+    height: auto;
+    background-color: white;
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.testimonial-content {
+    text-align: left;
+}
+
+.testimonial p {
+    font-style: italic;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    color: #555;
+}
+
+.testimonial-author {
+    display: flex;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.author-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 1rem;
+}
+
+/* Featured Game section styles */
+.featured-game {
+    padding: 6rem 2rem;
+    background-color: #f0f0f0;
+}
+
+.featured-game h2 {
+    text-align: center;
+    margin-bottom: 3rem;
+    font-size: 2.5rem;
+    color: #8B0000;
+}
+
+.featured-game-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.featured-game-image {
+    flex: 1;
+    min-width: 300px;
+    max-width: 500px;
+    margin-bottom: 2rem;
+}
+
+.featured-game-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.featured-game-description {
+    flex: 1;
+    min-width: 300px;
+    padding: 0 2rem;
+}
+
+.featured-game-description h3 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #8B0000;
+}
+
+.featured-game-description p {
+    margin-bottom: 1.5rem;
+}
+
+/* Timeline section styles */
+.timeline {
+    padding: 6rem 2rem;
+    background-color: #f8f8f8;
+}
+
+.timeline h2 {
+    text-align: center;
+    margin-bottom: 3rem;
+    font-size: 2.5rem;
+    color: #8B0000;
+}
+
+.timeline-container {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.timeline-container::after {
+    content: '';
+    position: absolute;
+    width: 6px;
+    background-color: #FF6347;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    margin-left: -3px;
+}
+
+.timeline-item {
+    padding: 10px 40px;
+    position: relative;
+    background-color: inherit;
+    width: 50%;
+}
+
+.timeline-item::after {
+    content: '';
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    right: -17px;
+    background-color: white;
+    border: 4px solid #FF6347;
+    top: 15px;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.timeline-left {
+    left: 0;
+}
+
+.timeline-right {
+    left: 50%;
+}
+
+.timeline-left::before {
+    content: " ";
+    height: 0;
+    position: absolute;
+    top: 22px;
+    width: 0;
+    z-index: 1;
+    right: 30px;
+    border: medium solid #FF6347;
+    border-width: 10px 0 10px 10px;
+    border-color: transparent transparent transparent #FF6347;
+}
+
+.timeline-right::before {
+    content: " ";
+    height: 0;
+    position: absolute;
+    top: 22px;
+    width: 0;
+    z-index: 1;
+    left: 30px;
+    border: medium solid #FF6347;
+    border-width: 10px 10px 10px 0;
+    border-color: transparent #FF6347 transparent transparent;
+}
+
+.timeline-right::after {
+    left: -16px;
+}
+
+.timeline-content {
+    padding: 20px 30px;
+    background-color: white;
+    position: relative;
+    border-radius: 6px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+/* CTA section styles */
+.cta {
+    background: linear-gradient(135deg, #FF6347, #FF8C00);
+    color: white;
+    padding: 6rem 2rem;
+    text-align: center;
+}
+
+.cta h2 {
+    margin-bottom: 1rem;
+    font-size: 2.5rem;
+}
+
+.cta p {
+    margin-bottom: 2rem;
+    font-size: 1.2rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Footer styles */
+footer {
+    background-color: #8B0000;
+    color: white;
+    padding: 3rem 2rem;
+    text-align: center;
+}
+
+/* Footer styles (continued) */
+.footer-content {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-section {
+    margin-bottom: 1.5rem;
+    flex: 1;
+    min-width: 200px;
+}
+
+.footer-section h3 {
+    margin-bottom: 1rem;
+    color: #FFA07A;
+    font-size: 1.3rem;
+}
+
+.footer-section p {
+    margin-bottom: 0.5rem;
+}
+
+footer p {
+    margin-top: 2rem;
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+
+.accessibility-tools {
+    position: fixed;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.accessibility-tools button {
+    display: block;
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+    border: none;
+    background-color: #8B0000;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.accessibility-tools button:hover {
+    background-color: #FF6347;
+}
+
+/* Quiz modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 10px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#quiz-form {
+    margin-top: 20px;
+}
+
+#quiz-form label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+#quiz-form input[type="radio"] {
+    margin-right: 10px;
+}
+
+#submit-quiz {
+    display: block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #8B0000;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#submit-quiz:hover {
+    background-color: #FF6347;
+}
+.menu-toggle {
+        display: none;
+        background: none;
+        border: none;
+        color: white;
+        font-size: 1.5rem;
+        cursor: pointer;
+    }
+/* Detailed Mobile-specific media queries */
+
+/* Base styles for mobile devices */
+@media (max-width: 767px) {
+    /* Typography adjustments */
+    html {
+        font-size: 14px;
+    }
+
+    body {
+        overflow-x: hidden;
+    }
+
+    h1 {
+        font-size: 2rem;
+        line-height: 1.2;
+    }
+
+    h2 {
+        font-size: 1.75rem;
+        line-height: 1.2;
+    }
+
+    p {
+        font-size: 1rem;
+        line-height: 1.5;
+    }
+
+    /* Header and navigation */
+    header {
+        position: fixed;
+        width: 100%;
+        z-index: 1000;
+    }
+
+    .header-content {
+        padding: 0.75rem 1rem;
+        flex-wrap: wrap;
+    }
+
+    .logo-container {
+        flex: 1;
+    }
+
+    .logo {
+        width: 2rem;
+        height: 2rem;
+        font-size: 1rem;
+    }
+
+    .logo-text {
+        font-size: 1.2rem;
+    }
+
+    nav {
+        width: 100%;
+        order: 3;
+    }
+
+    nav ul {
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: rgba(139, 0, 0, 0.9);
+        display: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    nav ul.show {
+        display: flex;
+    }
+
+    nav ul li {
+        margin: 0;
+        width: 100%;
+    }
+
+    nav ul li a {
+        display: block;
+        padding: 0.75rem 1rem;
+        text-align: center;
+    }
+
+    .menu-toggle {
+        display: block;
+        order: 2;
+        background: none;
+        border: none;
+        color: white;
+        font-size: 1.5rem;
+        cursor: pointer;
+        padding: 0.5rem;
+    }
+
+    /* Hero section */
+    .hero {
+        padding: 6rem 1rem 4rem;
+        min-height: auto;
+    }
+
+    .hero-content {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .hero h1 {
+        font-size: 2.25rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    /* Games section */
+    .games {
+        padding: 3rem 1rem;
+    }
+
+    .games h2 {
+        font-size: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    .game-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .game-card {
+        padding: 1.5rem;
+    }
+
+    .game-icon {
+        width: 4rem;
+        height: 4rem;
+        font-size: 1.5rem;
+    }
+
+    .game-card h3 {
+        font-size: 1.25rem;
+    }
+
+    /* Impact section */
+    .impact {
+        padding: 3rem 1rem;
+    }
+
+    .impact h2 {
+        font-size: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    .impact-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .impact-stat {
+        font-size: 2.25rem;
+    }
+
+    /* Featured game section */
+    .featured-game {
+        padding: 3rem 1rem;
+    }
+
+    .featured-game h2 {
+        font-size: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    .featured-game-content {
+        flex-direction: column;
+    }
+
+    .featured-game-image {
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 1.5rem;
+    }
+
+    .featured-game-description {
+        width: 100%;
+        padding: 0;
+    }
+
+    .featured-game-description h3 {
+        font-size: 1.5rem;
+    }
+
+    /* Timeline section */
+    .timeline {
+        padding: 3rem 1rem;
+    }
+
+    .timeline h2 {
+        font-size: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    .timeline-container::after {
+        left: 31px;
+    }
+
+    .timeline-item {
+        width: 100%;
+        padding-left: 70px;
+        padding-right: 25px;
+    }
+
+    .timeline-item::before {
+        left: 60px;
+        border-width: 10px 10px 10px 0;
+        border-color: transparent #FF6347 transparent transparent;
+    }
+
+    .timeline-left::after,
+    .timeline-right::after {
+        left: 15px;
+    }
+
+    .timeline-right {
+        left: 0%;
+    }
+
+    .timeline-content {
+        padding: 15px 20px;
+    }
+
+    /* CTA section */
+    .cta {
+        padding: 3rem 1rem;
+    }
+
+    .cta h2 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    .cta p {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    /* Footer */
+    footer {
+        padding: 2rem 1rem;
+    }
+
+    .footer-content {
+        flex-direction: column;
+    }
+
+    .footer-section {
+        margin-bottom: 1.5rem;
+        width: 100%;
+    }
+
+    .footer-section h3 {
+        font-size: 1.25rem;
+    }
+
+    /* Button styles */
+    .btn {
+        padding: 0.5rem 1.25rem;
+        font-size: 0.9rem;
+    }
+
+    /* Accessibility tools */
+    .accessibility-tools {
+        position: fixed;
+        top: auto;
+        bottom: 20px;
+        right: 20px;
+        transform: none;
+    }
+
+    /* Quiz modal */
+    .modal-content {
+        width: 90%;
+        max-width: 400px;
+        margin: 10% auto;
+    }
+}
+
+/* Adjustments for larger mobile devices (568px to 767px) */
+@media (min-width: 568px) and (max-width: 767px) {
+    html {
+        font-size: 15px;
+    }
+
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .game-grid,
+    .impact-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .footer-content {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .footer-section {
+        flex-basis: 50%;
+        padding: 0 1rem;
+    }
+}
+
+/* Prevent content overflow */
+@media (max-width: 767px) {
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    pre {
+        white-space: pre-wrap;
+        word-wrap: break-word;
+    }
+
+    .game-card,
+    .impact-stat,
+    .timeline-content {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+}
+
+/* High-resolution mobile devices */
+@media (max-width: 767px) and (min-resolution: 2dppx) {
+    html {
+        font-size: 16px;
+    }
+}
+
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo-container">
+                <div class="logo"><i class="fas fa-book-open"></i></div>
+                <span class="logo-text">Srijan</span>
+            </div>
+            <nav>
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <ul id="navMenu">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#games">Games</a></li>
+                    <li><a href="#impact">Impact</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#timeline">Features</a></li>
+                    <li><a href="#" class="btn">Join Us</a></li>
+                    <li class="language-selector">
+                        <select id="language-select">
+                            <option value="en">English</option>
+                            <option value="hi">हिंदी</option>
+                            <option value="bn">বাংলা</option>
+                            <option value="ta">தமிழ்</option>
+                        </select>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div id="particles-js"></div>
+            <div class="hero-content">
+                <h1 data-aos="fade-up">Welcome to SRIJAN</h1>
+                <p data-aos="fade-up" data-aos-delay="200">Educating Society on Respectful Treatment of Women
+                    '
+                
+                
+                </p>
+                <a href="#" class="btn pulse" data-aos="fade-up" data-aos-delay="400">Start Learning</a>
+                <a href="#" class="btn" data-aos="fade-up" data-aos-delay="600">Explore Games</a>
+            </div>
+        </section>
+
+        <section id="games" class="games">
+            <h2 data-aos="fade-up">Explore Our Games and Features</h2>
+            <div class="game-grid">
+                <div class="game-card" data-aos="flip-left" data-aos-delay="200">
+                    <div class="game-icon"><i class="fas fa-dharmachakra"></i></div>
+                    <h3>Animated Videos</h3>
+                    <p>Short, engaging stories that depict key values and lessons</p>
+                </div>
+                <div class="game-card" data-aos="flip-left" data-aos-delay="400">
+                    <div class="game-icon"><i class="fas fa-question-circle"></i></div>
+                   
+                    <h3> Quiz</h3>
+                    <p> Interactive assessments that test knowledge and attitudes.
+                         Immediate educational feedback for incorrect answers to encourage learning.
+                        Gamification elements, such as point systems and achievements, keep learners
+                        engaged.
+                        </p>
+                </div>
+                <div class="game-card" data-aos="flip-left" data-aos-delay="600">
+                    <div class="game-icon"><i class="fas fa-balance-scale"></i></div>
+                    <h3>Role-Playing Games</h3>
+                    <p>Quests challenge gender stereotypes, promote empathy, and offer rewards for
+                        inclusive and equitable behaviors.
+                        </p>
+                </div>
+                <div class="game-card" data-aos="flip-left" data-aos-delay="800">
+                    <div class="game-icon"><i class="fas fa-users"></i></div>
+                    <h3> Simulator Game</h3>
+                    <p>Players navigate real-life situations where their choices affect outcomes.
+                        Immediate feedback to reinforce respectful behavior and promote understanding of
+                        the consequences of negative actions.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="featured-game" class="featured-game">
+            <h2 data-aos="fade-up">MVP Feature</h2>
+            <div class="featured-game-content">
+                <div class="featured-game-image" data-aos="fade-right">
+                    <img src="https://cdn-gcp.new.marutitech.com/automation_data_analytic_with_robot_digital_visualization_big_data_scientist_1_68e810cf59.jpg" alt="Analysis of feature">
+                </div>
+                <div class="featured-game-description" data-aos="fade-left">
+                    <h3>AI-Driven Learning Customization:</h3>
+                    <p> Machine Learning-Based Behavioral Analysis:</p>
+                    <p>Features:</p>
+                    <ul>
+                        <li>Analyze text, voice, and interaction patterns within the game to measure true
+                            attitudinal shifts</li>
+                        <li>A machine learning algorithm analyzes each user’s interactions, cultural
+                            context, and learning patterns.</li>
+                        <li>The AI adjusts content difficulty, type, and pacing based on the user's
+                            engagement, ensuring a personalized experience.</li>
+                        <li>Distinguish between learned responses and genuine behavioral changes to
+                            assess the impact of the game over time.</li>
+                    </ul>
+                    <br>
+                    <a href="#" class="btn">Play Now</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="impact" class="impact">
+            <h2 data-aos="fade-up">Our Impact</h2>
+            <div class="impact-grid">
+                <div data-aos="zoom-in" data-aos-delay="200">
+                    <p class="impact-stat" id="playersCount">0</p>
+                    <p>Active Learners</p>
+                </div>
+                <div data-aos="zoom-in" data-aos-delay="400">
+                    <p class="impact-stat" id="gamesCount">0</p>
+                    <p>Games Completed</p>
+                </div>
+                <div data-aos="zoom-in" data-aos-delay="600">
+                    <p class="impact-stat" id="quizzesCount">0</p>
+                    <p>Quizzes Taken</p>
+                </div>
+                <div data-aos="zoom-in" data-aos-delay="800">
+                    <p class="impact-stat" id="feedbackPercent">0<span>%</span></p>
+                    <p>Positive Feedback</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="testimonials" class="testimonial">
+            <h2 data-aos="fade-up">What Our Users Say</h2>
+            <div class="swiper-container" data-aos="fade-up" data-aos-delay="200">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="testimonial-content">
+                            <p>"Initially skeptical, the parent portal on Srijan won me over. Watching my son's progress has been heartwarming. He's become more helpful at home and respectful to his sisters. The community impact data shows our village is changing. Thank you Srijan for nurturing a better future!"</p>
+                            <div class="testimonial-author">
+                                <img src="/api/placeholder/80/80" alt="Priya Sharma" class="author-image">
+                                <p><strong>Priya Sharma</strong><br>Student, Delhi</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="testimonial-content">
+                            <p>"Srijan has revolutionized my classroom! The interactive scenarios make discussions about respect truly impactful. My students are more engaged and I've noticed real changes in their behavior. The AI chatbot Mitra provides invaluable support. This app is a game-changer for our village. Highly recommend to all educators!"</p>
+                            <div class="testimonial-author">
+                                <img src="/api/placeholder/80/80" alt="Rajesh Gupta" class="author-image">
+                                <p><strong>Rajesh Gupta</strong><br>High School Teacher, Mumbai</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="testimonial-content">
+                            <p>"I thought Srijan would be boring, but it's actually cool! The immersive experiences really showed me what girls go through. Earning Respect Tokens for challenges is awesome. My friends and I compete to level up fastest. It's fun and I'm learning important stuff too!"</p>
+                            <div class="testimonial-author">
+                                <img src="/api/placeholder/80/80" alt="Aisha Patel" class="author-image">
+                                <p><strong>Aisha Patel</strong><br>IT Professional, Bengaluru</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </section>
+
+<section id="timeline" class="timeline">
+    <h2 data-aos="fade-up">Milestones</h2>
+    <div class="timeline-container">
+        <div class="timeline-item timeline-left" data-aos="fade-right">
+            <div class="timeline-content">
+                <h3>2005</h3>
+                <p>The Protection of Women from Domestic Violence Act</p>
+            </div>
+        </div>
+        <div class="timeline-item timeline-right" data-aos="fade-left">
+            <div class="timeline-content">
+                <h3>1986</h3>
+                <p>The Dowry Prohibition Act</p>
+            </div>
+        </div>
+        <div class="timeline-item timeline-left" data-aos="fade-right">
+            <div class="timeline-content">
+                <h3>1986</h3>
+                <p>The Indecent Representation of Women (Prohibition) Act</p>
+            </div>
+        </div>
+        <div class="timeline-item timeline-right" data-aos="fade-left">
+            <div class="timeline-content">
+                <h3>2013</h3>
+                <p>The Indecent Representation of Women (Prohibition) Act</p>
+            </div>
+        </div>
+        <div class="timeline-item timeline-left" data-aos="fade-right">
+            <div class="timeline-content">
+                <h3>1976</h3>
+                <p>42nd Amendment adds the words "socialist" and "secular" to the Preamble of the Constitution.</p>
+            </div>
+        </div>
+        <div class="timeline-item timeline-right" data-aos="fade-left">
+            <div class="timeline-content">
+                <h3>2006</h3>
+                <p>The Prohibition of Child Marriage Act</p>
+            </div>
+        </div>
+        <div class="timeline-item timeline-left" data-aos="fade-right">
+            <div class="timeline-content">
+                <h3>2002</h3>
+                <p>86th Amendment makes education a fundamental right for children aged 6-14.</p>
+            </div>
+        </div>
+        
+        <div class="timeline-item timeline-right" data-aos="fade-left">
+            <div class="timeline-content">
+                <h3>1987</h3>
+                <p>The Commission of Sati (Prevention) Act.</p>
+            </div>
+        </div>
+        <div class="timeline-item timeline-left" data-aos="fade-right">
+            <div class="timeline-content">
+                <h3>2002</h3>
+                <p>86th Amendment makes education a fundamental right for children aged 6-14.</p>
+            </div>
+        </div>
+        <div class="timeline-item timeline-right" data-aos="fade-left">
+            <div class="timeline-content">
+                <h3>1986</h3>
+                <p>The Indecent Representation of Women (Prohibition) Act</p>
+            </div>
+        </div>
+        
+
+    </div>
+</section>
+
+<section id="cta" class="cta">
+    <h2 data-aos="fade-up">Join the Journey</h2>
+    <p data-aos="fade-up" data-aos-delay="200">Become a part of our community and take the steps towards the right.</p>
+    <a href="#" class="btn pulse" data-aos="fade-up" data-aos-delay="400">Sign Up Now</a>
+</section>
+
+<footer>
+    <div class="footer-content">
+        <div class="footer-section">
+            <h3>About Us</h3>
+            <p>An educational platform focused on fostering young boys as how to treat women respectfully. 
+            </p>
+        </div>
+        <div class="footer-section">
+            <h3>Quick Links</h3>
+            <p><a href="#home">Home</a></p>
+            <p><a href="#games">Games</a></p>
+            <p><a href="#impact">Impact</a></p>
+            <p><a href="#testimonials">Testimonials</a></p>
+        </div>
+        <div class="footer-section">
+            <h3>Contact Us</h3>
+            <p>Email: info@Srijan.org</p>
+            <p>Phone: +91 123 456 7890</p>
+        </div>
+        <div class="footer-section">
+            <h3>Follow Us</h3>
+            <p><a href="#"><i class="fab fa-facebook"></i> Facebook</a></p>
+            <p><a href="#"><i class="fab fa-twitter"></i> Twitter</a></p>
+            <p><a href="#"><i class="fab fa-instagram"></i> Instagram</a></p>
+        </div>
+    </div>
+    <p>&copy; 2024 Srijan. All rights reserved.</p>
+</footer>
+
+<!--<div class="accessibility-tools">
+    <button id="increaseFontSize">A+</button>
+    <button id="decreaseFontSize">A-</button>
+    <button id="toggleContrast">Toggle High Contrast</button>
+    <button id="toggleReadAloud">Toggle Read Aloud</button>
+</div>-->
+
+<div id="quizModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Quick Constitution Quiz</h2>
+        <form id="quiz-form">
+            <label>
+                <input type="radio" name="quiz" value="a"> The Indian Constitution was adopted on 26th January 1950.
+            </label>
+            <label>
+                <input type="radio" name="quiz" value="b"> The Preamble to the Constitution was amended in 1976.
+            </label>
+            <label>
+                <input type="radio" name="quiz" value="c"> The Constitution originally had 395 articles in 22 parts.
+            </label>
+            <button type="submit" id="submit-quiz">Submit Answer</button>
+        </form>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.4.5/swiper-bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+<script>
+    // Initialize AOS
+    AOS.init({
+        duration: 1000,
+        once: true
+    });
+
+    // Initialize Swiper
+    new Swiper('.swiper-container', {
+        slidesPerView: 1,
+        spaceBetween: 30,
+        loop: true,
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+        breakpoints: {
+            640: {
+                slidesPerView: 2,
+            },
+            1024: {
+                slidesPerView: 3,
+            },
+        }
+    });
+
+    // Initialize particles.js
+    particlesJS('particles-js', {
+        particles: {
+            number: { value: 80 },
+            color: { value: '#ffffff' },
+            shape: { type: 'circle' },
+            opacity: { value: 0.5, random: true },
+            size: { value: 3, random: true },
+            move: { enable: true, speed: 3 }
+        }
+    });
+
+    // Navbar scroll effect
+    window.addEventListener('scroll', function() {
+        const header = document.querySelector('header');
+        header.classList.toggle('scrolled', window.scrollY > 0);
+    });
+
+    // Mobile menu toggle
+    document.getElementById('menuToggle').addEventListener('click', function() {
+        document.getElementById('navMenu').classList.toggle('show');
+    });
+
+    // Impact statistics animation
+    function animateValue(id, start, end, duration) {
+        let range = end - start;
+        let current = start;
+        let increment = end > start ? 1 : -1;
+        let stepTime = Math.abs(Math.floor(duration / range));
+        let obj = document.getElementById(id);
+        let timer = setInterval(function() {
+            current += increment;
+            obj.innerHTML = current;
+            if (current == end) {
+                clearInterval(timer);
+            }
+        }, stepTime);
+    }
+
+    // Trigger animation when the impact section is in view
+    const observer = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+            animateValue("playersCount", 0, 50000, 2000);
+            animateValue("gamesCount", 0, 100000, 2000);
+            animateValue("quizzesCount", 0, 500000, 2000);
+            animateValue("feedbackPercent", 0, 98, 2000);
+        }
+    }, { threshold: 0.5 });
+
+    observer.observe(document.querySelector("#impact"));
+
+    // Accessibility tools
+    let fontSize = 16;
+    document.getElementById('increaseFontSize').addEventListener('click', () => {
+        fontSize += 2;
+        document.body.style.fontSize = `${fontSize}px`;
+    });
+
+    document.getElementById('decreaseFontSize').addEventListener('click', () => {
+        fontSize -= 2;
+        document.body.style.fontSize = `${fontSize}px`;
+    });
+
+    document.getElementById('toggleContrast').addEventListener('click', () => {
+        document.body.classList.toggle('high-contrast');
+    });
+
+    // Quiz modal
+    const modal = document.getElementById("quizModal");
+    const btn = document.querySelector(".btn.pulse");
+    const span = document.getElementsByClassName("close")[0];
+
+    btn.onclick = function() {
+        modal.style.display = "block";
+    }
+
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+    document.getElementById('quiz-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const answer = document.querySelector('input[name="quiz"]:checked').value;
+        alert(`You selected option ${answer}. Let's learn more about the Constitution!`);
+        modal.style.display = "none";
+    });
+</script>
+</body>
+</html>
