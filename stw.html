@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Behave Around Women - Spin the Wheel</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Orbitron', sans-serif;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #000 url('/api/placeholder/1920/1080') no-repeat center center fixed;
+            background-size: cover;
+            overflow: hidden;
+            perspective: 1000px;
+        }
+        .container {
+            position: relative;
+            width: 600px;
+            height: 600px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transform-style: preserve-3d;
+        }
+        .spinbtn {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            z-index: 10;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-transform: uppercase;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 0.1em;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            cursor: pointer;  
+            user-select: none;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+            }
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 0 30px rgba(255, 255, 255, 0.8);
+            }
+        }
+        .spinbtn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        .wheel {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            overflow: hidden;
+            transition: transform 8s cubic-bezier(0.25, 0.1, 0.25, 1);
+            background: #000;
+        }
+        .wheel .segment {
+            position: absolute;
+            width: 50%;
+            height: 50%;
+            transform-origin: bottom right;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        .wheel .segment-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 10px;
+        }
+        .wheel .segment img {
+            width: 40px;
+            height: 40px;
+            margin-bottom: 5px;
+            filter: invert(1);
+        }
+        .result-card {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            width: 450px;
+            height: 300px;
+            border-radius: 20px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.2);
+            opacity: 0;
+            transition: all 0.5s;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+        .result-card.show {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
+        }
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255, 255, 255, 0.3);
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #fff;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .close-btn:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="spinbtn">SPIN</div>
+        <div class="wheel">
+            <!-- Segments will be dynamically added here -->
+        </div>
+    </div>
+    
+    <div class="result-card">
+        <button class="close-btn">&times;</button>
+        <h2>Tip for Behavior</h2>
+        <div class="content">
+            <div class="icon">💬</div>
+            <div class="details">
+                <h3 id="result"></h3>
+                <p id="description"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const wheel = document.querySelector('.wheel');
+        const spinBtn = document.querySelector('.spinbtn');
+        const resultCard = document.querySelector('.result-card');
+        const closeBtn = document.querySelector('.close-btn');
+        const resultSpan = document.getElementById('result');
+        const descriptionSpan = document.getElementById('description');
+        
+        let spinning = false;
+        let targetRotation = 0;
+
+        const tips = [
+            { tip: 'Be Respectful', description: 'Always treat her with respect, listen to her opinions.' },
+            { tip: 'Communicate Openly', description: 'Be open and honest in your conversations.' },
+            { tip: 'Be Confident', description: 'Confidence is attractive; believe in yourself.' },
+            { tip: 'Show Kindness', description: 'Acts of kindness go a long way.' },
+            { tip: 'Practice Good Hygiene', description: 'Make sure to take care of your appearance.' },
+            { tip: 'Be Yourself', description: 'Authenticity is important; don’t try to be someone you’re not.' },
+            { tip: 'Know Your Boundaries', description: 'Understand personal space and respect it.' },
+            { tip: 'Be Supportive', description: 'Support her goals and ambitions.' },
+            { tip: 'Stay Positive', description: 'A positive attitude is always appealing.' },
+            { tip: 'Have a Sense of Humor', description: 'A good sense of humor can make interactions enjoyable.' },
+            { tip: 'Listen Actively', description: 'Show that you are engaged and interested in what she has to say.' },
+            { tip: 'Avoid Pickup Lines', description: 'Genuine conversation beats cheesy lines any day.' }
+        ];
+
+        function createWheel() {
+            const segmentAngle = 360 / tips.length;
+            tips.forEach((tip, index) => {
+                const segment = document.createElement('div');
+                segment.className = 'segment';
+                segment.style.transform = `rotate(${segmentAngle * index}deg) skewY(${90 - segmentAngle}deg)`;
+                segment.style.backgroundColor = '#'+Math.floor(Math.random()*16777215).toString(16); // Random color
+
+                const content = document.createElement('div');
+                content.className = 'segment-content';
+                content.style.transform = `skewY(-${90 - segmentAngle}deg) rotate(${segmentAngle / 2}deg)`;
+
+                const icon = document.createElement('img');
+                icon.src = `/api/placeholder/40/40`;
+                icon.alt = `Icon ${index + 1}`;
+
+                const tipName = document.createElement('span');
+                tipName.className = 'tip-name';
+                tipName.textContent = tip.tip;
+
+                content.appendChild(icon);
+                content.appendChild(tipName);
+                segment.appendChild(content);
+                wheel.appendChild(segment);
+            });
+        }
+
+        spinBtn.onclick = function() {
+            if (spinning) return;
+            spinning = true;
+
+            resultCard.classList.remove('show');
+
+            const rotations = 5 + Math.random() * 5;
+            targetRotation += rotations * 360;
+            wheel.style.transform = `rotate(${targetRotation}deg)`;
+
+            setTimeout(() => {
+                const finalRotation = targetRotation % 360;
+                const segmentAngle = 360 / tips.length;
+                const winningIndex = Math.floor(finalRotation / segmentAngle);
+                const tip = tips[winningIndex];
+
+                resultSpan.textContent = tip.tip;
+                descriptionSpan.textContent = tip.description;
+                resultCard.classList.add('show');
+                spinning = false;
+            }, 8000);
+        }
+
+        closeBtn.onclick = function() {
+            resultCard.classList.remove('show');
+        }
+
+        createWheel();
+    </script>
+</body>
+</html>
