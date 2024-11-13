@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Educational Videos</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: #ffffff; /* Background color set to white */
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      color: #333; /* Adjust text color for readability */
+    }
+    .container {
+      max-width: 1000px;
+      width: 100%;
+      padding: 20px;
+      background-color: rgba(255, 255, 255, 0.9);
+      box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+      border-radius: 12px;
+    }
+    .title {
+      font-size: 36px;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 20px;
+      background: linear-gradient(to right, #6b46c1, #ed64a6);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 16px;
+    }
+    .video-card {
+      cursor: pointer;
+      background-color: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    .video-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+    }
+    .thumbnail {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+    .video-info {
+      padding: 15px;
+    }
+    .video-info h3 {
+      font-size: 20px;
+      margin: 0;
+      font-weight: bold;
+      color: #333;
+    }
+    .video-info p {
+      font-size: 14px;
+      color: #555;
+    }
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.85);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 10;
+    }
+    .modal-content {
+      background-color: #fff;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 700px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.3);
+    }
+    .modal-content iframe {
+      width: 100%;
+      height: 400px;
+      border: none;
+    }
+    .close-btn {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="title">Educational Videos</h1>
+    <div class="grid" id="videoGrid"></div>
+  </div>
+
+  <div class="modal-overlay" id="videoModal" style="display: none;">
+    <div class="modal-content">
+      <button class="close-btn" onclick="closeModal()">&times;</button>
+      <iframe id="videoFrame" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+  </div>
+
+  <script>
+    const videos = [
+      {
+        id: "nrZ21nD9I-0",
+        title: "Equality and Diversity - Animated Stories",
+        description: "Learn about equality and diversity through engaging animated stories that children can relate to.",
+        thumbnail: "https://i.ytimg.com/vi/nrZ21nD9I-0/hqdefault.jpg",
+        duration: "5:30"
+      },
+      {
+        id: "QGNnz3oq6mQ",
+        title: "Gender Equality: Breaking Stereotypes",
+        description: "An inspiring video about breaking gender stereotypes and promoting equality in society.",
+        thumbnail: "https://i.ytimg.com/vi/QGNnz3oq6mQ/hqdefault.jpg",
+        duration: "4:15"
+      },
+      {
+        id: "OIsyVZCB3KM",
+        title: "Women's Rights and Empowerment",
+        description: "Understanding the importance of women's rights and empowerment in creating a balanced society.",
+        thumbnail: "https://i.ytimg.com/vi/OIsyVZCB3KM/hqdefault.jpg",
+        duration: "6:20"
+      },
+      {
+        id: "x8I57fmnTdo",
+        title: "Respect and Understanding",
+        description: "A comprehensive look at fostering respect and understanding between all genders.",
+        thumbnail: "https://i.ytimg.com/vi/x8I57fmnTdo/hqdefault.jpg",
+        duration: "4:45"
+      }
+    ];
+
+    const videoGrid = document.getElementById('videoGrid');
+    const videoModal = document.getElementById('videoModal');
+    const videoFrame = document.getElementById('videoFrame');
+
+    videos.forEach(video => {
+      const card = document.createElement('div');
+      card.classList.add('video-card');
+      card.innerHTML = `
+        <img src="${video.thumbnail}" alt="${video.title}" class="thumbnail">
+        <div class="video-info">
+          <h3>${video.title}</h3>
+          <p>${video.description}</p>
+          <p>Duration: ${video.duration}</p>
+        </div>
+      `;
+      card.onclick = () => openModal(video.id);
+      videoGrid.appendChild(card);
+    });
+
+    function openModal(videoId) {
+      videoFrame.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`;
+      videoModal.style.display = 'flex';
+    }
+
+    function closeModal() {
+      videoFrame.src = '';
+      videoModal.style.display = 'none';
+    }
+  </script>
+</body>
+</html>
