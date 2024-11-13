@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Simulations</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to right, #ff7e5f, #feb47b);
+      color: #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      text-align: center;
+      margin-top: 20px;
+      color: #fff;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+      background: -webkit-linear-gradient(#ff7e5f, #feb47b);
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin-top: 40px;
+      padding: 0 15px;
+      text-align: center;
+    }
+
+    .simulations-list {
+      display: grid;
+      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    }
+
+    .simulation-card {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
+
+    .simulation-card:hover {
+      transform: translateY(-10px);
+    }
+
+    .simulation-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+
+    .simulation-card p {
+      font-size: 1rem;
+      color: #555;
+    }
+
+    .simulation-content {
+      display: none;
+      background-color: #fff;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      width: 90%;
+      max-width: 800px;
+      margin: auto;
+      text-align: left;
+    }
+
+    .button {
+      width: 100%;
+      padding: 15px;
+      background-color: #ff7e5f;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .button:hover {
+      background-color: #feb47b;
+    }
+
+    .option-button {
+      width: 100%;
+      padding: 15px;
+      background-color: #fff;
+      border: 2px solid #ff7e5f;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 10px;
+    }
+
+    .option-button:hover {
+      background-color: #ff7e5f;
+      color: #fff;
+      border-color: #feb47b;
+    }
+
+    .correct-option {
+      background-color: #d4edda;
+      color: #155724;
+      border-color: #c3e6cb;
+    }
+
+    .incorrect-option {
+      background-color: #f8d7da;
+      color: #721c24;
+      border-color: #f5c6cb;
+    }
+
+    .feedback {
+      background-color: #f1f1f1;
+      padding: 15px;
+      margin-top: 20px;
+      border-radius: 10px;
+    }
+
+    .feedback.correct {
+      background-color: #e0f7e0;
+      color: #388e3c;
+    }
+
+    .feedback.incorrect {
+      background-color: #ffe0e0;
+      color: #d32f2f;
+    }
+
+    .score {
+      text-align: center;
+      font-size: 1.2rem;
+      margin-top: 10px;
+    }
+
+    #next {
+      background-color: #28a745;
+    }
+
+    #next:hover {
+      background-color: #218838;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Interactive Simulations</h1>
+    <div id="simulations" class="simulations-list"></div>
+    <div id="simulation-content" class="simulation-content">
+      <div id="scenario-content"></div>
+      <div id="options" class="options"></div>
+      <div id="feedback" class="feedback"></div>
+      <button id="next" class="button" style="display: none;">Next Scenario</button>
+      <div id="score" class="score"></div>
+    </div>
+  </div>
+
+  <script>
+    const simulations = [
+      {
+        id: 1,
+        title: "Workplace Scenarios",
+        description: "Navigate common workplace situations and learn appropriate responses",
+        scenarios: [
+          {
+            situation: "A colleague makes inappropriate comments about a female team member's appearance",
+            context: "During a team meeting, a colleague repeatedly makes comments about a female team member's appearance, making her visibly uncomfortable.",
+            options: [
+              {
+                text: "Ignore the situation to avoid conflict",
+                feedback: "Ignoring inappropriate behavior enables it to continue and creates a hostile work environment.",
+                score: 0
+              },
+              {
+                text: "Speak up and explain why such comments are inappropriate",
+                feedback: "Correct! Speaking up helps create a respectful workplace environment and shows support for your colleague.",
+                score: 10
+              },
+              {
+                text: "Join in with similar comments",
+                feedback: "This perpetuates harmful behavior and contributes to a toxic work environment.",
+                score: 0
+              }
+            ]
+          },
+          {
+            situation: "Credit for a female colleague's work is being given to someone else",
+            context: "During a presentation, you notice that a male colleague is taking credit for work primarily done by your female teammate.",
+            options: [
+              {
+                text: "Stay silent to avoid workplace drama",
+                feedback: "Staying silent allows unfair treatment to continue and discourages workplace equality.",
+                score: 0
+              },
+              {
+                text: "Speak up and ensure proper credit is given",
+                feedback: "Excellent! Ensuring proper credit helps maintain fairness and encourages recognition of everyone's contributions.",
+                score: 10
+              },
+              {
+                text: "Discuss it privately with others later",
+                feedback: "While better than silence, addressing it immediately is more effective in preventing future occurrences.",
+                score: 5
+              }
+            ]
+          },
+          {
+            situation: "A colleague makes a joke about a minority group",
+            context: "In a casual conversation, a colleague makes a joke that targets a minority group in your office, making several people uncomfortable.",
+            options: [
+              {
+                text: "Laugh along to avoid making the situation awkward",
+                feedback: "Laughing along condones inappropriate behavior and contributes to a toxic workplace culture.",
+                score: 0
+              },
+              {
+                text: "Call out the joke and explain why it's offensive",
+                feedback: "Great! Calling out harmful behavior helps foster inclusivity and respect in the workplace.",
+                score: 10
+              },
+              {
+                text: "Leave the room to avoid confrontation",
+                feedback: "While it avoids immediate conflict, leaving the situation unresolved perpetuates harmful behavior.",
+                score: 5
+              }
+            ]
+          }
+        ]
+      }
+    ];
+
+    let selectedSim = null;
+    let currentScenario = 0;
+    let score = 0;
+    let showNext = false;
+
+    const simulationsContainer = document.getElementById('simulations');
+    const simulationContent = document.getElementById('simulation-content');
+    const scenarioContent = document.getElementById('scenario-content');
+    const optionsContainer = document.getElementById('options');
+    const feedbackContainer = document.getElementById('feedback');
+    const nextButton = document.getElementById('next');
+    const scoreDisplay = document.getElementById('score');
+
+    function renderSimulations() {
+      simulations.forEach(sim => {
+        const simCard = document.createElement('div');
+        simCard.classList.add('simulation-card');
+        simCard.innerHTML = `
+          <h3>${sim.title}</h3>
+          <p>${sim.description}</p>
+        `;
+        simCard.onclick = () => startSimulation(sim.id);
+        simulationsContainer.appendChild(simCard);
+      });
+    }
+
+    function startSimulation(simId) {
+      selectedSim = simulations.find(sim => sim.id === simId);
+      currentScenario = 0;
+      score = 0;
+      scoreDisplay.innerHTML = `Score: ${score}`;
+      simulationsContainer.style.display = 'none';
+      simulationContent.style.display = 'block';
+      renderScenario();
+    }
+
+    function renderScenario() {
+      const scenario = selectedSim.scenarios[currentScenario];
+      scenarioContent.innerHTML = `
+        <h2>Scenario: ${scenario.situation}</h2>
+        <p>${scenario.context}</p>
+      `;
+      optionsContainer.innerHTML = '';
+      scenario.options.forEach((option, index) => {
+        const optionButton = document.createElement('button');
+        optionButton.classList.add('option-button');
+        optionButton.textContent = option.text;
+        optionButton.onclick = () => handleAnswer(option, optionButton);
+        optionsContainer.appendChild(optionButton);
+      });
+    }
+
+    function handleAnswer(option, optionButton) {
+      feedbackContainer.textContent = option.feedback;
+      score += option.score;
+      scoreDisplay.innerHTML = `Score: ${score}`;
+      showNext = true;
+
+      if (option.score > 0) {
+        optionButton.classList.add('correct-option');
+      } else {
+        optionButton.classList.add('incorrect-option');
+      }
+
+      nextButton.style.display = 'inline-block';
+    }
+
+    function nextScenario() {
+      currentScenario++;
+      if (currentScenario >= selectedSim.scenarios.length) {
+        simulationContent.innerHTML = `<p><strong>Simulation Complete!</strong> Your final score is: ${score}</p>`;
+        scoreDisplay.style.display = 'none';
+      } else {
+        renderScenario();
+        nextButton.style.display = 'none';
+        feedbackContainer.textContent = '';
+      }
+    }
+
+    nextButton.onclick = nextScenario;
+
+    renderSimulations();
+  </script>
+</body>
+
+</html>
