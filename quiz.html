@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Quizzes</title>
+  <style>
+    :root {
+      --dark-blue: #1a1a3b;
+      --secondary-blue: #0056b3;
+      --light-blue: #4a90e2;
+      --hover-blue: #357ab7;
+      --success-green: #4caf50;
+      --error-red: #f44336;
+      --background-gradient: radial-gradient(circle at 50% 50%, #1a1a3b, #e43b0c);
+      --font-family: 'Arial', sans-serif;
+    }
+    body {
+      font-family: var(--font-family);
+      background: var(--background-gradient);
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      color: #fff;
+    }
+    .container {
+      max-width: 600px;
+      background-color: var(--secondary-blue);
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      padding: 30px;
+      margin: 15px;
+      text-align: center;
+      transition: transform 0.3s;
+    }
+    .container:hover {
+      transform: scale(1.02);
+    }
+    .quiz-header {
+      font-size: 2.5rem;
+      color: #e0e0e0;
+      margin-bottom: 20px;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    }
+    .quiz-list, .quiz-options, .quiz-result {
+      list-style-type: none;
+      padding: 0;
+    }
+    .quiz-list button, .quiz-options button {
+      background-color: var(--light-blue);
+      color: white;
+      font-size: 1rem;
+      padding: 12px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      width: 100%;
+      transition: background-color 0.3s, transform 0.2s;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+    .quiz-list button:hover, .quiz-options button:hover {
+      background-color: var(--hover-blue);
+      transform: translateY(-2px);
+    }
+    .feedback {
+      padding: 12px;
+      color: #fff;
+      margin-top: 10px;
+      border-radius: 8px;
+      font-size: 1rem;
+      width: 90%;
+      margin: 0 auto;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+    .correct { background-color: var(--success-green); }
+    .incorrect { background-color: var(--error-red); }
+    .next-btn, .retry-btn {
+      background-color: #ff6f61;
+      color: white;
+      padding: 12px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      margin-top: 15px;
+      display: inline-block;
+      font-size: 1rem;
+      transition: background-color 0.3s, transform 0.2s;
+    }
+    .next-btn:hover, .retry-btn:hover {
+      background-color: #e65c50;
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1 class="quiz-header">Choose a Quiz</h1>
+  <div id="quiz-container">
+    <ul class="quiz-list">
+      <li><button onclick="startQuiz(0)">Understanding Gender Equality</button></li>
+      <li><button onclick="startQuiz(1)">Workplace Respect</button></li>
+      <li><button onclick="startQuiz(2)">Understanding Consent</button></li>
+    </ul>
+    <div id="quiz"></div>
+  </div>
+</div>
+
+<script>
+  const quizzes = [
+    {
+      title: "Understanding Gender Equality",
+      questions: [
+        {
+          question: "What is the fundamental principle of gender equality?",
+          options: ["Equal rights and opportunities regardless of gender", "Women having more rights than men", "Men having more rights than women", "Separate rights for different genders"],
+          correct: 0,
+          explanation: "Gender equality means ensuring equal rights, responsibilities, and opportunities for all genders."
+        },
+        {
+          question: "Which of these promotes gender equality in the workplace?",
+          options: ["Equal pay for equal work", "Hiring based on gender", "Gender-specific roles", "Separate facilities"],
+          correct: 0,
+          explanation: "Equal pay for equal work is a fundamental principle of workplace gender equality."
+        }
+      ]
+    },
+    {
+      title: "Workplace Respect",
+      questions: [
+        {
+          question: "What constitutes workplace harassment?",
+          options: ["Giving constructive feedback", "Unwanted advances or inappropriate comments", "Professional disagreements", "Regular performance reviews"],
+          correct: 1,
+          explanation: "Harassment includes any unwanted behavior that creates a hostile work environment."
+        },
+        {
+          question: "How should you respond to witnessing harassment?",
+          options: ["Ignore it to avoid conflict", "Report it to appropriate authorities", "Join in to fit in", "Blame the victim"],
+          correct: 1,
+          explanation: "Reporting harassment helps maintain a safe and respectful workplace for everyone."
+        }
+      ]
+    },
+    {
+      title: "Understanding Consent",
+      questions: [
+        {
+          question: "What is the key principle of consent?",
+          options: ["It must be freely given and can be withdrawn", "Once given, it cannot be taken back", "It's implied in relationships", "It's not necessary between partners"],
+          correct: 0,
+          explanation: "Consent must be freely given, informed, and can be withdrawn at any time."
+        },
+        {
+          question: "Which statement about consent is true?",
+          options: ["Silence means consent", "Previous consent applies to future situations", "Consent must be explicit and enthusiastic", "Consent can't be withdrawn"],
+          correct: 2,
+          explanation: "Consent must be explicit, enthusiastic, and given for each specific situation."
+        }
+      ]
+    }
+  ];
+
+  let currentQuiz, currentQuestion, score;
+
+  function startQuiz(quizIndex) {
+    currentQuiz = quizzes[quizIndex];
+    currentQuestion = 0;
+    score = 0;
+    document.querySelector(".quiz-header").innerText = currentQuiz.title;
+    document.querySelector(".quiz-list").style.display = "none";
+    document.getElementById('quiz').innerHTML = '';
+    loadQuestion();
+  }
+
+  function loadQuestion() {
+    if (currentQuestion < currentQuiz.questions.length) {
+      const questionObj = currentQuiz.questions[currentQuestion];
+      document.getElementById('quiz').innerHTML = `
+        <p><strong>Question ${currentQuestion + 1}:</strong> ${questionObj.question}</p>
+        <ul class="quiz-options">
+          ${questionObj.options.map((option, index) => `<li><button onclick="checkAnswer(${index})">${option}</button></li>`).join('')}
+        </ul>
+      `;
+    } else {
+      displayResults();
+    }
+  }
+
+  function checkAnswer(selectedIndex) {
+    const questionObj = currentQuiz.questions[currentQuestion];
+    const feedback = document.createElement('div');
+    feedback.classList.add("feedback");
+    if (selectedIndex === questionObj.correct) {
+      score++;
+      feedback.classList.add("correct");
+      feedback.innerHTML = `<p>Correct! ${questionObj.explanation}</p>`;
+    } else {
+      feedback.classList.add("incorrect");
+      feedback.innerHTML = `<p>Incorrect. ${questionObj.explanation}</p>`;
+    }
+    document.getElementById('quiz').appendChild(feedback);
+    currentQuestion++;
+    setTimeout(() => loadQuestion(), 2000);
+  }
+
+  function displayResults() {
+    document.getElementById('quiz').innerHTML = `
+      <p class="quiz-result">Quiz Complete! You scored ${score} out of ${currentQuiz.questions.length}</p>
+      <button class="retry-btn" onclick="retryQuiz()">Try Another Quiz</button>
+    `;
+  }
+
+  function retryQuiz() {
+    document.querySelector(".quiz-header").innerText = "Choose a Quiz";
+    document.querySelector(".quiz-list").style.display = "block";
+    document.getElementById('quiz').innerHTML = "";
+  }
+</script>
+
+</body>
+</html>
