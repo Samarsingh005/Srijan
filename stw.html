@@ -17,8 +17,7 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background: #000 url('/api/placeholder/1920/1080') no-repeat center center fixed;
-            background-size: cover;
+            background: linear-gradient(135deg, #ff7e5f, #feb47b);
             overflow: hidden;
             perspective: 1000px;
         }
@@ -192,7 +191,7 @@
                 const segment = document.createElement('div');
                 segment.className = 'segment';
                 segment.style.transform = `rotate(${segmentAngle * index}deg) skewY(${90 - segmentAngle}deg)`;
-                segment.style.backgroundColor = '#'+Math.floor(Math.random()*16777215).toString(16); // Random color
+                segment.style.backgroundColor = `hsl(${Math.random() * 360}, 70%, 60%)`; // Bright colors
 
                 const content = document.createElement('div');
                 content.className = 'segment-content';
@@ -236,7 +235,8 @@
             }, 8000);
         }
 
-        closeBtn.onclick = function() {
+        closeBtn.onclick 
+ = function() {
             resultCard.classList.remove('show');
         }
 
