@@ -171,79 +171,268 @@
     </div>
   </div>
 
-  <script>
-    const simulations = [
-      {
-        id: 1,
-        title: "Workplace Scenarios",
-        description: "Navigate common workplace situations and learn appropriate responses",
-        scenarios: [
-          {
-            situation: "A colleague makes inappropriate comments about a female team member's appearance",
-            context: "During a team meeting, a colleague repeatedly makes comments about a female team member's appearance, making her visibly uncomfortable.",
-            options: [
-              {
-                text: "Ignore the situation to avoid conflict",
-                feedback: "Ignoring inappropriate behavior enables it to continue and creates a hostile work environment.",
-                score: 0
-              },
-              {
-                text: "Speak up and explain why such comments are inappropriate",
-                feedback: "Correct! Speaking up helps create a respectful workplace environment and shows support for your colleague.",
-                score: 10
-              },
-              {
-                text: "Join in with similar comments",
-                feedback: "This perpetuates harmful behavior and contributes to a toxic work environment.",
-                score: 0
-              }
-            ]
-          },
-          {
-            situation: "Credit for a female colleague's work is being given to someone else",
-            context: "During a presentation, you notice that a male colleague is taking credit for work primarily done by your female teammate.",
-            options: [
-              {
-                text: "Stay silent to avoid workplace drama",
-                feedback: "Staying silent allows unfair treatment to continue and discourages workplace equality.",
-                score: 0
-              },
-              {
-                text: "Speak up and ensure proper credit is given",
-                feedback: "Excellent! Ensuring proper credit helps maintain fairness and encourages recognition of everyone's contributions.",
-                score: 10
-              },
-              {
-                text: "Discuss it privately with others later",
-                feedback: "While better than silence, addressing it immediately is more effective in preventing future occurrences.",
-                score: 5
-              }
-            ]
-          },
-          {
-            situation: "A colleague makes a joke about a minority group",
-            context: "In a casual conversation, a colleague makes a joke that targets a minority group in your office, making several people uncomfortable.",
-            options: [
-              {
-                text: "Laugh along to avoid making the situation awkward",
-                feedback: "Laughing along condones inappropriate behavior and contributes to a toxic workplace culture.",
-                score: 0
-              },
-              {
-                text: "Call out the joke and explain why it's offensive",
-                feedback: "Great! Calling out harmful behavior helps foster inclusivity and respect in the workplace.",
-                score: 10
-              },
-              {
-                text: "Leave the room to avoid confrontation",
-                feedback: "While it avoids immediate conflict, leaving the situation unresolved perpetuates harmful behavior.",
-                score: 5
-              }
-            ]
-          }
-        ]
-      }
-    ];
+  <script>const simulations = [
+    {
+      id: 1,
+      title: "Workplace Scenarios",
+      description: "Navigate common workplace situations and learn appropriate responses",
+      scenarios: [
+        {
+          situation: "A colleague makes inappropriate comments about a female team member's appearance",
+          context: "During a team meeting, a colleague repeatedly makes comments about a female team member's appearance, making her visibly uncomfortable.",
+          options: [
+            {
+              text: "Ignore the situation to avoid conflict",
+              feedback: "Ignoring inappropriate behavior enables it to continue and creates a hostile work environment.",
+              score: 0
+            },
+            {
+              text: "Speak up and explain why such comments are inappropriate",
+              feedback: "Correct! Speaking up helps create a respectful workplace environment and shows support for your colleague.",
+              score: 10
+            },
+            {
+              text: "Join in with similar comments",
+              feedback: "This perpetuates harmful behavior and contributes to a toxic work environment.",
+              score: 0
+            }
+          ]
+        },
+        {
+          situation: "Credit for a female colleague's work is being given to someone else",
+          context: "During a presentation, you notice that a male colleague is taking credit for work primarily done by your female teammate.",
+          options: [
+            {
+              text: "Stay silent to avoid workplace drama",
+              feedback: "Staying silent allows unfair treatment to continue and discourages workplace equality.",
+              score: 0
+            },
+            {
+              text: "Speak up and ensure proper credit is given",
+              feedback: "Excellent! Ensuring proper credit helps maintain fairness and encourages recognition of everyone's contributions.",
+              score: 10
+            },
+            {
+              text: "Discuss it privately with others later",
+              feedback: "While better than silence, addressing it immediately is more effective in preventing future occurrences.",
+              score: 5
+            }
+          ]
+        },
+        {
+          situation: "A colleague makes a joke about a minority group",
+          context: "In a casual conversation, a colleague makes a joke that targets a minority group in your office, making several people uncomfortable.",
+          options: [
+            {
+              text: "Laugh along to avoid making the situation awkward",
+              feedback: "Laughing along condones inappropriate behavior and contributes to a toxic workplace culture.",
+              score: 0
+            },
+            {
+              text: "Call out the joke and explain why it's offensive",
+              feedback: "Great! Calling out harmful behavior helps foster inclusivity and respect in the workplace.",
+              score: 10
+            },
+            {
+              text: "Leave the room to avoid confrontation",
+              feedback: "While it avoids immediate conflict, leaving the situation unresolved perpetuates harmful behavior.",
+              score: 5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      id: 2,
+      title: "In-Public Scenarios",
+      description: "Navigate common public situations and learn appropriate responses",
+      scenarios: [
+        {
+          situation: "You overhear a conversation where someone is making inappropriate comments about a stranger's appearance",
+          context: "While sitting in a café, you overhear a group of people making rude comments about someone's appearance as they walk by.",
+          options: [
+            {
+              text: "Ignore the situation to avoid getting involved",
+              feedback: "Ignoring inappropriate behavior allows it to continue and sends the message that such behavior is acceptable.",
+              score: 0
+            },
+            {
+              text: "Politely confront the group and explain why such comments are inappropriate",
+              feedback: "Great! Speaking up helps create a more respectful environment and challenges harmful behavior.",
+              score: 10
+            },
+            {
+              text: "Join in with the conversation to fit in",
+              feedback: "This supports harmful behavior and makes the situation worse, contributing to a disrespectful public atmosphere.",
+              score: 0
+            }
+          ]
+        },
+        {
+          situation: "You notice someone in distress but are unsure how to help",
+          context: "You see a person sitting alone on a bench, visibly upset, and unsure if they need help or want to be left alone.",
+          options: [
+            {
+              text: "Continue with your day and ignore the person",
+              feedback: "Ignoring someone in distress can make them feel even more isolated. It's important to offer help when possible.",
+              score: 0
+            },
+            {
+              text: "Approach them and ask if they need assistance or someone to talk to",
+              feedback: "Correct! Offering support shows empathy and can help the person feel more comfortable.",
+              score: 10
+            },
+            {
+              text: "Tell someone else nearby to check on the person instead",
+              feedback: "While asking someone else to help is better than doing nothing, personally offering support is more impactful.",
+              score: 5
+            }
+          ]
+        },
+        {
+          situation: "Someone cuts in front of you in line at a public place",
+          context: "While waiting in a long line at a store, someone pushes in front of you without apologizing or acknowledging it.",
+          options: [
+            {
+              text: "Ignore it and continue waiting silently",
+              feedback: "Ignoring the situation may allow others to take advantage of your patience and make you feel disrespected.",
+              score: 0
+            },
+            {
+              text: "Politely point out the mistake and ask them to go to the back of the line",
+              feedback: "Correct! Addressing the situation calmly helps maintain fairness and respect in public spaces.",
+              score: 10
+            },
+            {
+              text: "Complain loudly to others in line about the person",
+              feedback: "While it's good to address the situation, complaining loudly can escalate the situation unnecessarily and make others uncomfortable.",
+              score: 5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      id: 3,
+      title: "School Scenarios",
+      description: "Navigate common school situations and learn appropriate responses",
+      scenarios: [
+        {
+          situation: "You witness a classmate being bullied by another student",
+          context: "In the hallway between classes, you see one student mocking and teasing another student in front of their peers.",
+          options: [
+            {
+              text: "Ignore the situation and keep walking",
+              feedback: "Ignoring bullying allows it to continue and sends a message that it's acceptable behavior.",
+              score: 0
+            },
+            {
+              text: "Intervene and tell the bully that their behavior is unacceptable",
+              feedback: "Great! Standing up to bullying helps create a safer and more supportive environment for everyone.",
+              score: 10
+            },
+            {
+              text: "Tell a teacher about it later instead of intervening directly",
+              feedback: "Reporting bullying is important, but it's best to intervene when you can do so safely to help stop the behavior immediately.",
+              score: 5
+            }
+          ]
+        },
+        {
+          situation: "A classmate is copying answers during a test",
+          context: "While taking a test, you notice a classmate copying answers from your paper, trying to avoid being caught.",
+          options: [
+            {
+              text: "Ignore it and focus on your own test",
+              feedback: "Ignoring cheating allows dishonesty to persist and undermines the value of your own work.",
+              score: 0
+            },
+            {
+              text: "Report the incident to the teacher after the test",
+              feedback: "Reporting cheating helps maintain academic integrity and ensures fairness in the classroom.",
+              score: 10
+            },
+            {
+              text: "Confront your classmate and ask them to stop",
+              feedback: "Confronting the classmate is brave, but it's also important to report it to the teacher for the issue to be properly addressed.",
+              score: 5
+            }
+          ]
+        },
+        {
+          situation: "A group of students is making fun of a peer's appearance",
+          context: "During lunch, a group of students are making fun of another student's clothing and appearance, making them feel embarrassed.",
+          options: [
+            {
+              text: "Laugh along to fit in with the group",
+              feedback: "Laughing along with bullying behavior harms others and perpetuates a negative environment.",
+              score: 0
+            },
+            {
+              text: "Stand up for the peer being bullied and ask the group to stop",
+              feedback: "Great! Standing up to bullying helps foster a positive and inclusive atmosphere at school.",
+              score: 10
+            },
+            {
+              text: "Ignore it and avoid getting involved",
+              feedback: "While avoiding conflict might seem easy, ignoring bullying allows it to continue and hurts others.",
+              score: 5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      id: 4,
+      title: "Mall Scenarios",
+      description: "Navigate common situations in a mall and learn appropriate responses",
+      scenarios: [
+        {
+          situation: "You see a person stealing something in a mall store",
+          context: "While shopping in a store, you notice a person discreetly stealing an item and putting it in their bag.",
+          options: [
+            {
+              text: "Ignore it and continue shopping",
+              feedback: "Ignoring theft allows dishonest behavior to continue and can lead to more serious issues in the future.",
+              score: 0
+            },
+            {
+              text: "Alert a store employee or security guard",
+              feedback: "Great! Reporting theft helps maintain integrity and ensures that actions are taken to stop the behavior.",
+              score: 10
+            },
+            {
+              text: "Confront the person yourself",
+              feedback: "While confronting the person is brave, it could escalate the situation. It's safer to alert authorities instead.",
+              score: 5
+            }
+          ]
+        },
+        {
+          situation: "A child is lost and looking for their parent",
+          context: "You notice a young child who looks lost, walking around and looking for someone in a crowded mall.",
+          options: [
+            {
+              text: "Continue walking and ignore the situation",
+              feedback: "Ignoring a lost child could lead to confusion and distress. It's important to offer help.",
+              score: 0
+            },
+            {
+              text: "Ask the child if they need help and take them to a security desk",
+              feedback: "Correct! Helping the child find a safe place, like a security desk, ensures they are cared for until their parents are found.",
+              score: 10
+            },
+            {
+              text: "Let the child figure it out on their own",
+              feedback: "While the child may eventually find their parents, helping them ensures their safety and comfort.",
+              score: 5
+            }
+          ]
+        }
+      ]
+    }
+  ];
+  
 
     let selectedSim = null;
     let currentScenario = 0;
